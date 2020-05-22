@@ -1,4 +1,5 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# game-of-life
+A version of Conway's Game of Life built using React.
 
 ## Available Scripts
 
