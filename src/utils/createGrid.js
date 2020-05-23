@@ -1,3 +1,4 @@
+import React from 'react';
 import Cell from '../components/Cell';
 
 const createGrid = () => {
