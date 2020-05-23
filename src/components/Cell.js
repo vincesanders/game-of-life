@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const Cell = () => {
+const Cell = (props) => {
+    const [alive, setAlive] = useState(props.alive)
+    const cellStyle = {
+        backgroundColor: alive ? 'green' : undefined
+    }
+    const handleClick = () => {
+        setAlive(!alive);
+    }
     return (
-        <Container></Container>
+        <Container onClick={handleClick} style={cellStyle} ></Container>
     );
 }
 

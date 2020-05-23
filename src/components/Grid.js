@@ -3,7 +3,9 @@ import styled from 'styled-components';
 import createGrid from '../utils/createGrid';
 
 const Grid = () => {
-    const [grid, setGrid] = useState(createGrid());
+    const [rows, setRows] = useState(50);
+    const [columns, setColumns] = useState(50);
+    const [grid, setGrid] = useState(createGrid(rows, columns));
     return (
         <Container>
             {grid.map((row, rowIndex) => {
