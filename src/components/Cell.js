@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const Cell = (props) => {
+const Cell = props => {
     const [alive, setAlive] = useState(props.alive)
     const cellStyle = {
         backgroundColor: alive ? 'green' : undefined
