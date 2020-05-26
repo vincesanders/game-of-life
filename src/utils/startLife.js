@@ -6,7 +6,6 @@ const startLife = (dispatch) => {
     const rows = store.getState().rows;
     const cols = store.getState().columns
     const grid = store.getState().grid;
-    console.log('startLife called');
     if (!bool) {
         return;
     }

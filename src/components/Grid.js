@@ -1,24 +1,11 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { setIsSimulating, setGrid } from '../state/actions';
-import startLife from '../utils/startLife';
+import { setGrid } from '../state/actions';
 
 const Grid = () => {
-    const isSimulating = useSelector(state => state.isSimulating);
     const grid = useSelector(state => state.grid);
     const dispatch = useDispatch();
-    
-    const simulation = useRef(isSimulating);
-    simulation.current = isSimulating;
-
-    const handleClick = e => {
-        dispatch(setIsSimulating(!isSimulating));
-        if (!isSimulating) {
-            simulation.current = true;
-            startLife(dispatch);
-        }
-    }
 
     const handleCellClick = (row, column) => {
         grid[row][column] = !grid[row][column];
@@ -27,7 +14,6 @@ const Grid = () => {
 
     return (
         <Container>
-            <button onClick={handleClick}>start</button>
             {grid ? grid.map((row, rowIndex) => {
                 return (
                     <div key={rowIndex}>
