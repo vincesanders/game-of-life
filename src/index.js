@@ -6,11 +6,11 @@ import thunk from 'redux-thunk';
 import reducer from './state/reducer';
 import App from './App';
 
-const store = createStore(reducer, applyMiddleware(thunk));
+export const store = createStore(reducer, applyMiddleware(thunk));
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider>
+    <Provider store={store} >
       <App />
     </Provider>
   </React.StrictMode>,

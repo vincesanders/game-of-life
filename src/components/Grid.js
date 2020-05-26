@@ -1,77 +1,28 @@
-import React, { useState, useCallback, useRef } from 'react';
-import produce from 'immer';
+import React, { useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import createGrid from '../utils/createGrid';
+import { setIsSimulating, setGrid } from '../state/actions';
+import startLife from '../utils/startLife';
 
 const Grid = () => {
-    const [rows, setRows] = useState(50);
-    const [columns, setColumns] = useState(50);
-    const [grid, setGrid] = useState(() => {
-        return createGrid(rows, columns);
-    });
-    const [simulating, setSimulating] = useState(false);
-
-    const simulation = useRef(simulating);
-    simulation.current = simulating;
-
-    const startLife = useCallback(() => {
-        if (!simulation.current) {
-            return;
-        }
-        setGrid(grid => {
-            return produce(grid, gridCopy => {
-                for (let r = 0; r < rows; r++) {
-                    for (let c = 0; c < columns; c++) {
-                        let neighbors = 0;
-                        for (let i = -1; i < 2; i++) {
-                            //loop through neighbors
-                            for (let j = -1; j < 2; j++) {
-                                let newR = r + i;
-                                let newC = c + j;
-                                //skip self
-                                if (i === 0 && j === 0) {
-                                    continue;
-                                } else {
-                                    //wrap around if i and j are out of bounds
-                                    if (newR < 0) {
-                                        newR = rows + newR; //the last index of r
-                                    } else if (newR >= rows) {
-                                        newR = 0;
-                                    }
-                                    if (newC < 0) {
-                                        newC = columns + newC;
-                                    } else if (newC >= columns) {
-                                        newC = 0;
-                                    }
-                                }
-                                neighbors += grid[newR][newC];
-                            }
-                        }
-                        if (grid[r][c] === true && neighbors < 2 || neighbors > 3) {
-                        gridCopy[r][c] = false;
-                        } else if (grid[r][c] === false && neighbors === 3) {
-                        gridCopy[r][c] = true;
-                        }
-                    }
-                }
-            });
-        });
-        console.log('startLife called')
-        setTimeout(startLife, 300);
-    }, []);
+    const isSimulating = useSelector(state => state.isSimulating);
+    const grid = useSelector(state => state.grid);
+    const dispatch = useDispatch();
+    
+    const simulation = useRef(isSimulating);
+    simulation.current = isSimulating;
 
     const handleClick = e => {
-        setSimulating(!simulating);
-        if (!simulating) {
+        dispatch(setIsSimulating(!isSimulating));
+        if (!isSimulating) {
             simulation.current = true;
-            startLife();
+            startLife(dispatch);
         }
     }
 
     const handleCellClick = (row, column) => {
-        setGrid(produce(grid, gridCopy => {
-            gridCopy[row][column] = !grid[row][column];
-        }))
+        grid[row][column] = !grid[row][column];
+        dispatch(setGrid(grid));
     }
 
     return (

@@ -8,6 +8,7 @@ import {
 
 const initialState = {
     isSimulating: false,
+    speed: 300, //update every x ms
     rows: 50,
     columns: 50,
     grid: createGrid(50, 50)
