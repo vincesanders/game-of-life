@@ -57,7 +57,7 @@ const Grid = () => {
             });
         });
         console.log('startLife called')
-        setTimeout(startLife, 1000);
+        setTimeout(startLife, 300);
     }, []);
 
     const handleClick = e => {
