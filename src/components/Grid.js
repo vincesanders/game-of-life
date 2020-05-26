@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { setGrid } from '../state/actions';
+import { setGrid, resetGenerations } from '../state/actions';
 
 const Grid = () => {
     const grid = useSelector(state => state.grid);
@@ -11,6 +11,7 @@ const Grid = () => {
     const handleCellClick = (row, column) => {
         grid[row][column] = !grid[row][column];
         dispatch(setGrid(grid));
+        dispatch(resetGenerations());
     }
 
     return (

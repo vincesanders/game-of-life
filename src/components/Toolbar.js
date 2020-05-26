@@ -33,6 +33,8 @@ const Toolbar = () => {
             case 'reset':
                 dispatch(resetGenerations());
                 break;
+            default:
+                break;
         }
     }
 

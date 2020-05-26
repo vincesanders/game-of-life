@@ -38,7 +38,7 @@ const startLife = (dispatch) => {
                     neighbors += grid[newR][newC];
                 }
             }
-            if (grid[r][c] === true && neighbors < 2 || neighbors > 3) {
+            if (grid[r][c] === true && (neighbors < 2 || neighbors > 3)) {
             gridCopy[r][c] = false;
             } else if (grid[r][c] === false && neighbors === 3) {
             gridCopy[r][c] = true;
