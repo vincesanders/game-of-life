@@ -1,4 +1,5 @@
 export const SET_IS_SIMULATING = 'SET_IS_SIMULATING';
+export const SET_SPEED = 'SET_SPEED';
 export const SET_ROWS = 'SET_ROWS';
 export const SET_COLUMNS = 'SET_COLUMNS';
 export const SET_GRID = 'SET_GRID';
@@ -6,7 +7,10 @@ export const RESET_GENERATIONS = 'RESET_GENERATIONS';
 
 export const setIsSimulating = bool => dispatch => {
     dispatch({ type: SET_IS_SIMULATING, payload: bool });
-    //run startLife here
+}
+
+export const setSpeed = speed => dispatch => {
+    dispatch({ type: SET_SPEED, payload: speed });
 }
 
 export const setRows = rows => dispatch => {

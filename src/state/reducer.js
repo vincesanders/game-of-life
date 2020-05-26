@@ -1,6 +1,7 @@
 import createGrid from '../utils/createGrid';
 import {
     SET_IS_SIMULATING,
+    SET_SPEED,
     SET_ROWS,
     SET_COLUMNS,
     SET_GRID,
@@ -23,6 +24,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 isSimulating: action.payload
+            }
+        case SET_SPEED:
+            return {
+                ...state,
+                speed: action.payload
             }
         case SET_ROWS:
             return {
