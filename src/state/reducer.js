@@ -31,14 +31,20 @@ const reducer = (state = initialState, action) => {
                 speed: action.payload
             }
         case SET_ROWS:
+            const gridNewRows = createGrid(action.payload, state.columns);
             return {
                 ...state,
-                rows: action.payload
+                rows: action.payload,
+                grid: [...gridNewRows],
+                generations: 0
             }
         case SET_COLUMNS:
+            const gridNewColumns = createGrid(state.rows, action.payload);
             return {
                 ...state,
-                columns: action.payload
+                columns: action.payload,
+                grid: [...gridNewColumns],
+                generations: 0
             }
         case SET_GRID:
             return {

@@ -4,7 +4,7 @@ const startLife = (dispatch) => {
     const bool = store.getState().isSimulating;
     const speed = store.getState().speed;
     const rows = store.getState().rows;
-    const cols = store.getState().columns
+    const cols = store.getState().columns;
     const grid = store.getState().grid;
     if (!bool) {
         return;

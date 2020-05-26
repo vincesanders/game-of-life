@@ -14,11 +14,11 @@ export const setSpeed = speed => dispatch => {
 }
 
 export const setRows = rows => dispatch => {
-    dispatch({ type: SET_ROWS, payload: rows });
+    dispatch({ type: SET_ROWS, payload: parseInt(rows) });
 }
 
 export const setColumns = cols => dispatch => {
-    dispatch({ type: SET_COLUMNS, payload: cols });
+    dispatch({ type: SET_COLUMNS, payload: parseInt(cols) });
 }
 
 export const setGrid = grid => dispatch => {
