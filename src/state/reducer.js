@@ -8,10 +8,12 @@ import {
 
 const initialState = {
     isSimulating: false,
-    speed: 300, //update every x ms
+    speed: 100, //update every x ms
+    cellSize: 6, //size of cell square in pixels
     rows: 50,
     columns: 50,
-    grid: createGrid(50, 50)
+    grid: createGrid(50, 50),
+    generations: 0
 }
 
 const reducer = (state = initialState, action) => {
@@ -34,7 +36,8 @@ const reducer = (state = initialState, action) => {
         case SET_GRID:
             return {
                 ...state,
-                grid: [...action.payload]
+                grid: [...action.payload],
+                generations: ++state.generations
             }
         default:
             return state;

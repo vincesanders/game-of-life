@@ -5,6 +5,7 @@ import { setGrid } from '../state/actions';
 
 const Grid = () => {
     const grid = useSelector(state => state.grid);
+    const cellSize = useSelector(state => state.cellSize);
     const dispatch = useDispatch();
 
     const handleCellClick = (row, column) => {
@@ -19,7 +20,9 @@ const Grid = () => {
                     <div key={rowIndex}>
                         {row.map((alive, colIndex) => {
                             const cellStyle = {
-                                backgroundColor: alive ? 'green' : undefined
+                                backgroundColor: alive ? 'green' : undefined,
+                                height: cellSize + 'px',
+                                width: cellSize + 'px'
                             }
                             return <Cell key={`${rowIndex}-${colIndex}`} onClick={() => handleCellClick(rowIndex, colIndex)} style={cellStyle}/>;
                         })}
@@ -38,8 +41,6 @@ const Container = styled.div`
 `
 
 const Cell = styled.div`
-    width: 24px;
-    height: 24px;
     border: 1px solid black;
     display: inline-block;
 `

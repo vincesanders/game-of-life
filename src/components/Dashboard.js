@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import createGrid from '../utils/createGrid';
 import Toolbar from './Toolbar';
 import Grid from './Grid';
+import Footer from './Footer';
 
 const Dashboard = () => {
     return (
@@ -10,6 +10,7 @@ const Dashboard = () => {
             <h1>The Game of Life</h1>
             <Toolbar />
             <Grid />
+            <Footer />
         </Container>
     );
 }
