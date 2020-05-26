@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setIsSimulating } from '../state/actions';
 import startLife from '../utils/startLife';
+import randomizeGrid from '../utils/randomizeGrid';
 
 const Toolbar = () => {
     const isSimulating = useSelector(state => state.isSimulating);
@@ -14,11 +15,15 @@ const Toolbar = () => {
                     startLife(dispatch);
                 }
                 break;
+            case 'randomize':
+                randomizeGrid();
+                break;
         }
     }
     return (
         <div>
-            <button onClick={() => handleClick('start')}>{isSimulating ? 'stop' : 'start'}</button>
+            <button onClick={() => handleClick('start')}>{isSimulating ? 'Stop' : 'Start'}</button>
+            <button onClick={() => handleClick('randomize')}>Randomize</button>
         </div>
     );
 }
