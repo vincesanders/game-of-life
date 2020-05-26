@@ -2,33 +2,12 @@ import React, { useState, useCallback, useRef, useEffect } from 'react';
 import produce from 'immer';
 import styled from 'styled-components';
 import createGrid from '../utils/createGrid';
-// import Cell from './Cell';
 
-const operations = [
-    [0, 1],
-    [0, -1],
-    [1, -1],
-    [-1, 1],
-    [1, 1],
-    [-1, -1],
-    [1, 0],
-    [-1, 0]
-];
-
-// const Grid = ({ grid, setGrid, rows, columns }) => {
 const Grid = () => {
     const [rows, setRows] = useState(50);
     const [columns, setColumns] = useState(50);
     const [grid, setGrid] = useState(() => {
-        const matrix = [];
-        for (let row = 0; row < rows; row++) {
-            const currentRow = [];
-            for (let col = 0; col < columns; col++) {
-                currentRow.push(false)
-            }
-            matrix.push(currentRow);
-        }
-        return matrix;
+        return createGrid(rows, columns);
     });
     const [simulating, setSimulating] = useState(false);
 
@@ -44,19 +23,34 @@ const Grid = () => {
                 for (let r = 0; r < rows; r++) {
                     for (let c = 0; c < columns; c++) {
                         let neighbors = 0;
-                        operations.forEach(([x, y]) => {
-                        const newR = r + x;
-                        const newC = c + y;
-                        if (newR >= 0 && newR < rows && newC >= 0 && newC < columns) {
-                            //true will evaluate to 1, false to 0
-                            neighbors += grid[newR][newC];
+                        for (let i = -1; i < 2; i++) {
+                            //loop through neighbors
+                            for (let j = -1; j < 2; j++) {
+                                let newR = r + i;
+                                let newC = c + j;
+                                //skip self
+                                if (i === 0 && j === 0) {
+                                    continue;
+                                } else {
+                                    //wrap around if i and j are out of bounds
+                                    if (newR < 0) {
+                                        newR = rows + newR; //the last index of r
+                                    } else if (newR >= rows) {
+                                        newR = 0;
+                                    }
+                                    if (newC < 0) {
+                                        newC = columns + newC;
+                                    } else if (newC >= columns) {
+                                        newC = 0;
+                                    }
+                                }
+                                neighbors += grid[newR][newC];
+                            }
                         }
-                        });
-
-                        if (neighbors < 2 || neighbors > 3) {
-                        gridCopy[r][c] = 0;
-                        } else if (grid[r][c] === 0 && neighbors === 3) {
-                        gridCopy[r][c] = 1;
+                        if (grid[r][c] === true && neighbors < 2 || neighbors > 3) {
+                        gridCopy[r][c] = false;
+                        } else if (grid[r][c] === false && neighbors === 3) {
+                        gridCopy[r][c] = true;
                         }
                     }
                 }
