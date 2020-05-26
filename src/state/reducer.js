@@ -3,7 +3,8 @@ import {
     SET_IS_SIMULATING,
     SET_ROWS,
     SET_COLUMNS,
-    SET_GRID
+    SET_GRID,
+    RESET_GENERATIONS
 } from './actions';
 
 const initialState = {
@@ -38,6 +39,11 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 grid: [...action.payload],
                 generations: ++state.generations
+            }
+        case RESET_GENERATIONS:
+            return {
+                ...state,
+                generations: 0
             }
         default:
             return state;

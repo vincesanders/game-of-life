@@ -1,4 +1,4 @@
-import { setGrid } from '../state/actions';
+import { setGrid, resetGenerations } from '../state/actions';
 import { store } from '../index';
 
 const randomizeGrid = () => {
@@ -19,6 +19,7 @@ const randomizeGrid = () => {
         grid.push(currentRow);
     }
     store.dispatch(setGrid(grid));
+    store.dispatch(resetGenerations());
 }
 
 export default randomizeGrid;
