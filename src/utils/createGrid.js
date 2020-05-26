@@ -1,7 +1,4 @@
-import React from 'react';
-import Cell from '../components/Cell';
-
-const createGrid = (rows, cols, alive, setAlive) => {
+const createGrid = (rows, cols) => {
     //TODO: more efficient data structure?
     const grid = []
     //O(n^2) TODO: more effecient creation method?
